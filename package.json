@@ -1,0 +1,30 @@
+{
+    "name": "electron-nunjucks",
+    "version": "1.0.0",
+    "description": "A nunjucks engine implementation for use with electron.",
+    "main": "index.js",
+    "scripts": {
+        "test": "electron ./test/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chriseaton/electron-nunjucks.git"
+    },
+    "keywords": [
+        "nunjucks",
+        "electron",
+        "engine",
+        "template"
+    ],
+    "author": "Christopher Eaton",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/chriseaton/electron-nunjucks/issues"
+    },
+    "homepage": "https://github.com/chriseaton/electron-nunjucks#readme",
+    "dependencies": {
+        "electron": "^1.7.10",
+        "mime": "^2.1.0",
+        "nunjucks": "^3.0.1"
+    }
+}
