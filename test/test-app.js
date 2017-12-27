@@ -1,16 +1,12 @@
 const electron = require('electron');
-const nunjucks = require('electron-nunjucks');
+const nunjucks = require('../index.js');
 
 const app = electron.app;
+let mainWindow;
+
 nunjucks.install(app, {
     path: 'templates/'
 });
-
-// Adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
-
-// Prevent window being garbage collected
-let mainWindow;
 
 function onClosed() {
 	mainWindow = null;

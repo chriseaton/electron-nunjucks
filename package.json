@@ -4,7 +4,8 @@
     "description": "A nunjucks engine implementation for use with electron.",
     "main": "index.js",
     "scripts": {
-        "test": "electron ./test/"
+        "test": "node ./test/test.js",
+        "test-app": "electron ./test/test-app.js"
     },
     "repository": {
         "type": "git",
@@ -16,7 +17,11 @@
         "engine",
         "template"
     ],
-    "author": "Christopher Eaton",
+    "author": {
+        "name": "Christopher Eaton",
+        "email": "chriseaton@live.com",
+        "url": "https://github.com/chriseaton/"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/chriseaton/electron-nunjucks/issues"
@@ -26,5 +31,8 @@
         "electron": "^1.7.10",
         "mime": "^2.1.0",
         "nunjucks": "^3.0.1"
+    },
+    "devDependencies": {
+        "spectron": "^3.7.2"
     }
 }

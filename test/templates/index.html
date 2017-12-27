@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Hello World!</h1>
+        <hr />
+        {% set testvar = "123" %}
+        <span class="test-1">{{ testvar }}</span>
+        <hr />
+        {% include "./partial.html" %}
+        <hr />
+        {% include "./sub-path/partial-1.html" %}
+        <hr />
+        {% include "./sub-path/sub-path/partial-1-a.html" %}
+    </body>
+</html>
