@@ -1,6 +1,6 @@
 {
     "name": "electron-nunjucks",
-    "version": "1.1.1",
+    "version": "1.0.1",
     "description": "A nunjucks engine implementation for use with electron.",
     "main": "index.js",
     "scripts": {
