@@ -7,7 +7,7 @@ Add the package to your project.
 
 ```npm install electron-nunjucks --save```
 
-Import the package into your electron app setup code.
+Import the package into your electron app setup code and call the ```install``` function as shown below.
 
 ```
 const electron = require('electron');
