@@ -2,6 +2,11 @@
 <html>
     <body>
         <h1>Hello World!</h1>
+        Template:<br />
+        {{ template | dump }}
+        <hr />
+        Custom Data:<br />
+        {{ data | dump }}
         <hr />
         {% set testvar = "123" %}
         <span class="test-1">{{ testvar }}</span>

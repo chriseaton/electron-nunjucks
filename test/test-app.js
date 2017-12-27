@@ -17,7 +17,8 @@ function createMainWindow() {
 		width: 600,
 		height: 400
 	});
-	win.loadURL(`file://${__dirname}/templates/index.html`);
+	nunjucks.setContext(`${__dirname}/templates/index.html`, 'ABC, 123... Baby you and me!');
+	win.loadURL(`file://${__dirname}/templates/index.html`, { test: 12345 });
 	win.on('closed', onClosed);
 	return win;
 }

@@ -5,6 +5,8 @@ const url = require('url');
 const { protocol } = require('electron');
 const nunjucks = require('nunjucks');
 
+let contextRegister = {};
+
 module.exports = {
 
     /**
@@ -17,6 +19,31 @@ module.exports = {
                 en.intercept(req, callback);
             })
         });
+    },
+
+    /**
+     * Sets custom context data that becomes accessible within the nunjucks template during (nunjucks) rendering.
+     * @param {String} templateFilePath - The file path to the template (don't include the protocol).
+     * @param {*} data - The custom data to set. This will be available to the template under the variable "data".
+     */
+    setContext: function (templateFilePath, data) {
+        //normalizpe the path
+        templateFilePath = path.resolve(templateFilePath);
+        //set the context data 
+        contextRegister[templateFilePath] = data;
+    },
+
+    /**
+     * Removes the context data for the specified template, or, clears *all* template context data from the app. 
+     * @param {String} [templateFilePath] - Optionally specify a template to remove context data for. If not set, all 
+     *                                      template context data in the app will be cleared.
+     */
+    clearContext: function(templateFilePath) {
+        if (templateFilePath) {
+            delete contextRegister[templateFilePath];
+            return;
+        }
+        contextRegister = {};
     }
 
 }
@@ -64,7 +91,18 @@ class ElectronNunjucks {
                 if (self.config.debug) {
                     console.info(`Electron-Nunjucts (Rendering): ${pathname}`);
                 }
-                nunjucks.render(pathname, function (err, res) {
+                let context = {
+                    data: contextRegister[pathname] || null,
+                    template: {
+                        path: pathname,
+                        fileName: path.basename(pathname),
+                        dir: path.dirname(pathname),
+                        dirName: path.basename(path.dirname(pathname)),
+                        ext: ext,
+                        mime: mimeType
+                    }
+                };
+                nunjucks.render(pathname, context, function (err, res) {
                     if (err) {
                         self.handleException(err, callback);
                     } else {
