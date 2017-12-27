@@ -50,7 +50,42 @@ Within the install function, you can include nearly all [nunjucks standard optio
     noCache: false,
     tags: null,
     renderErrors: true,
-    debug: false
+    debug: false,
+    extensions: null,
+    filters: null,
+    globals: null
+}
+```
+
+#### Extensions
+Extensions can be included by populating the configuration ```extensions``` object with each extension as a key-values. The key being the name of the extension, and the value being the extension instance. More information [here](https://mozilla.github.io/nunjucks/api.html#custom-tags).
+
+#### Filters
+Filters can be passed in under the configuration ```filters``` array. More information [here](https://mozilla.github.io/nunjucks/api.html#custom-filters).
+
+Example
+```
+...
+filters: [
+    {
+        name: 'slug',
+        func: function (str) {
+            return str && str.replace(/\s/g, '-', str).toLowerCase();
+        },
+        async: false
+    }
+]
+```
+
+#### Globals
+Globals may be set by passing them into the configuration ```globals``` as a simple key-value object.
+
+Example
+```
+...
+globals: {
+    'myglobal': 123,
+    'otherglobal': "This is global!"
 }
 ```
 

@@ -38,7 +38,7 @@ module.exports = {
      * @param {String} [templateFilePath] - Optionally specify a template to remove context data for. If not set, all 
      *                                      template context data in the app will be cleared.
      */
-    clearContext: function(templateFilePath) {
+    clearContext: function (templateFilePath) {
         if (templateFilePath) {
             delete contextRegister[templateFilePath];
             return;
@@ -61,8 +61,39 @@ class ElectronNunjucks {
             noCache: false,
             tags: null,
             renderErrors: true,
-            debug: false
+            debug: false,
+            extensions: null,
+            filters: null,
+            globals: null
         }, config);
+
+        this.env = nunjucks.configure({
+            autoescape: this.config.autoescape,
+            throwOnUndefined: this.config.throwOnUndefined,
+            trimBlocks: this.config.trimBlocks,
+            lstripBlocks: this.config.lstripBlocks,
+            noCache: this.config.noCache,
+            tags: this.config.tags
+        });
+
+        //add extensions
+        if (this.config.extensions) {
+            for (let ext in this.config.extensions) {
+                this.env.addExtension(ext, this.config.extensions[ext]);
+            }
+        }
+        //add filters
+        if (this.config.filters) {
+            for (let filter of this.config.filters) {
+                this.env.addFilter(filter.name, filter.func, filter.async || false);
+            }
+        }
+        //add globals
+        if (this.config.globals) {
+            for (let g in this.config.globals) {
+                this.env.addGlobal(g, this.config.globals[g]);
+            }
+        }
     }
 
     parseFilePath(reqUrl) {

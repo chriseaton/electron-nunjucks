@@ -5,7 +5,19 @@ const app = electron.app;
 let mainWindow;
 
 nunjucks.install(app, {
-    path: 'templates/'
+	path: 'templates/',
+	filters: [
+		{
+			name: 'slug',
+			func: function (str) {
+				return str && str.replace(/\s/g, '-', str).toLowerCase();
+			},
+			async: false
+		}
+	],
+	globals: {
+		'myglobal': 'Look ma! I\'m global!'
+	}
 });
 
 function onClosed() {

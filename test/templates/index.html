@@ -8,6 +8,10 @@
         Custom Data:<br />
         {{ data | dump }}
         <hr />
+        Custom Filtered: {{ "This is a long $dollar." | slug }}
+        <hr />
+        Global: {{ myglobal }}
+        <hr />
         {% set testvar = "123" %}
         <span class="test-1">{{ testvar }}</span>
         <hr />
