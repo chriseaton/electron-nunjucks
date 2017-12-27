@@ -26,10 +26,11 @@ nunjucks.install(electron.app, {
 
 Within the install function, you can include nearly all [nunjucks standard options](https://mozilla.github.io/nunjucks/api.html#configure) (```web``` and ```express``` are ignored) as well as some extras.
 
-- path: The directory root of your nunjucks template files. Defaults to the current working directory. It is recomended to set this.
-- protocol: The protocol to listen on, you can customize this if you wish.
-- ext: Array of file extensions to be processed by nunjucks.
-- renderErrors: Indicates errors should be rendered to the response renderer.
+- ```path```: The directory root of your nunjucks template files. Defaults to the current working directory. It is recomended to set this.
+- ```protocol```: The protocol to listen on, you can customize this if you wish.
+- ```ext```: Array of file extensions to be processed by nunjucks.
+- ```renderErrors```: Indicates errors should be rendered to the response renderer.
+- ```debug```: Enables console output of debugging information and errors.
 - For all other settings, please see: [nunjucks configuration](https://mozilla.github.io/nunjucks/api.html#configure)
 
 #### All Options &amp; Defaults
@@ -44,7 +45,8 @@ Within the install function, you can include nearly all [nunjucks standard optio
     lstripBlocks: false,
     noCache: false,
     tags: null,
-    renderErrors: true
+    renderErrors: true,
+    debug: false
 }
 ```
 

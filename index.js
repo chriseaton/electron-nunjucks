@@ -33,7 +33,8 @@ class ElectronNunjucks {
             lstripBlocks: false,
             noCache: false,
             tags: null,
-            renderErrors: true
+            renderErrors: true,
+            debug: false
         }, config);
     }
 
@@ -52,11 +53,16 @@ class ElectronNunjucks {
             let pathname = this.parseFilePath(req.url);
             let ext = path.extname(pathname);
             let mimeType = mime.getType(ext);
-            console.info(`pathname: ${pathname}, ext: ${ext}, mime: ${mimeType}`);
+            if (self.config.debug) {
+                console.info(`Electron-Nunjucts (Evaluating): pathname= ${pathname}, ext= ${ext}, mime= ${mimeType}`);
+            }
             let buf = fs.readFileSync(pathname);
             if (this.config.ext.indexOf(ext) >= 0) {
                 if (!mimeType) {
                     mimeType = 'text/html';
+                }
+                if (self.config.debug) {
+                    console.info(`Electron-Nunjucts (Rendering): ${pathname}`);
                 }
                 nunjucks.render(pathname, function (err, res) {
                     if (err) {
@@ -85,7 +91,9 @@ class ElectronNunjucks {
      * @param {Function} callback 
      */
     handleException(err, callback) {
-        console.error(err);
+        if (this.config.debug) {
+            console.error(`Electron-Nunjucts (Error):\n${err}`);
+        }
         if (!err.code && this.config.renderErrors) {
             return callback({
                 data: new Buffer(`<h1>Error Rendering Nunjucks Template</h1><pre style="width: 100%; overflow: auto;">${err.stack ? err.stack : err}</pre>`),
